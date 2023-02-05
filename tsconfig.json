@@ -1,0 +1,7 @@
+{
+    //tanzimate typeScript
+    "compilerOptions": {
+        //che khorooji be ma bede moghe compile kardan
+        "target": "ES5"
+    }
+} 

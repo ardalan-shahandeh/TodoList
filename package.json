@@ -1,0 +1,15 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "tsc my.ts -w"
+  },
+  "author": "",
+  "license": "ISC"
+}
