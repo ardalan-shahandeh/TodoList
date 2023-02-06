@@ -1,4 +1,3 @@
-///////////////////TODO List///////////////
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -25,9 +24,6 @@ var TodoStateChanger = /** @class */ (function () {
     function TodoStateChanger(newState) {
         this.newState = newState;
     }
-    TodoStateChanger.prototype.canChangeState = function (todo) {
-        return !!todo;
-    };
     TodoStateChanger.prototype.changeState = function (todo) {
         if (this.canChangeState(todo)) {
             todo.state = this.newState;
@@ -42,8 +38,8 @@ var compeleteTodoStateChanger = /** @class */ (function (_super) {
         return _super.call(this, TodoState.Compelete) || this;
     }
     compeleteTodoStateChanger.prototype.canChangeState = function (todo) {
-        return _super.prototype.canChangeState.call(this, todo) && (todo.state == TodoState.Active || todo.state == TodoState.Deleted);
+        return !!todo && (todo.state == TodoState.Active
+            || todo.state == TodoState.Deleted);
     };
     return compeleteTodoStateChanger;
 }(TodoStateChanger));
-var st = new compeleteTodoStateChanger();

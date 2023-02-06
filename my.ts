@@ -1,5 +1,3 @@
-///////////////////TODO List///////////////
-
 interface Todo{
   name:string;
   state: TodoState;
@@ -12,12 +10,38 @@ enum TodoState {
   Deleted
 }
 
-class TodoStateChanger {
-  constructor (private newState: TodoState) {}
+class TodoService {
 
-  canChangeState(todo:Todo):boolean {
-    return !!todo;
+  private static _lastId: number = 0
+
+  constructor(private todos:Todo[]) {}
+
+  private get nextId(){
+    return TodoService.getNextId()
   }
+
+  private set nextId(nextId){
+    TodoService._lastId = nextId - 1
+  }
+
+  static getNextId() {
+    return TodoService._lastId +=1;
+  }
+
+  public add(todo: Todo) {
+    var newId = this.nextId
+  }
+
+  private getAll() {
+    return this.todos 
+  }
+}
+
+abstract class TodoStateChanger {
+  constructor (protected newState: TodoState) {}
+
+  abstract canChangeState(todo:Todo):boolean;
+
   changeState(todo: Todo): Todo {
     if(this.canChangeState(todo))
     {
@@ -27,16 +51,18 @@ class TodoStateChanger {
   }
 }
 
-
-class compeleteTodoStateChanger extends TodoStateChanger {
+class compeleteTodoStateChanger extends TodoStateChanger 
+{
   constructor() {
-    super(TodoState.Compelete)
+    super(TodoState.Compelete);
   }
 
   canChangeState(todo: Todo): boolean {
-    return super.canChangeState(todo)&& (todo.state == TodoState.Active || todo.state == TodoState.Deleted)    
+    return !!todo && (todo.state == TodoState.Active 
+      || todo.state == TodoState.Deleted)    
   }
+}  
+
+class smartTodo {
+  constructor(public name:string) {}
 }
-
-var st = new compeleteTodoStateChanger();
-
